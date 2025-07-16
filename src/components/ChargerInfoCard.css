@@ -1,0 +1,410 @@
+/* ChargerInfoCard.css - Live Style (transformisan iz live kartica) */
+
+/* Glavni kontejner - koristi live kartica stil */
+.status-card-block.charger-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 320px;
+  width: 100%;
+  min-width: 280px;
+  max-width: 400px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  position: relative;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.status-card-block.charger-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Status header sa glassmorphism efektom */
+.status-card-block.charger-card .status-header-card {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  border-bottom: 1px solid #e2e8f0;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.status-card-block.charger-card .status-header-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--status-color);
+}
+
+/* Status specifične boje */
+.status-card-block.charger-card[data-status="charging"] {
+  --status-color: #10b981;
+}
+
+.status-card-block.charger-card[data-status="idle"] {
+  --status-color: #6b7280;
+}
+
+.status-card-block.charger-card[data-status="error"] {
+  --status-color: #ef4444;
+}
+
+.status-card-block.charger-card[data-status="completed"] {
+  --status-color: #3b82f6;
+}
+
+/* Status Icon */
+.status-card-block.charger-card .status-icon {
+  font-size: 2rem;
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Status Info */
+.status-card-block.charger-card .status-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.status-card-block.charger-card .status-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+  letter-spacing: -0.025em;
+}
+
+.status-card-block.charger-card .status-count {
+  font-size: 0.875rem;
+  color: #64748b;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Status Badge */
+.status-card-block.charger-card .status-badge {
+  background: var(--status-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 1.125rem;
+  min-width: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Charger Details sekcija */
+.charger-details {
+  padding: 2rem;
+  flex-grow: 1;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.detail-item:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-color: var(--status-color);
+}
+
+.detail-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--status-color);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.detail-item:hover::before {
+  transform: scaleX(1);
+}
+
+.detail-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.detail-icon {
+  font-size: 1rem;
+  opacity: 0.7;
+}
+
+.detail-value {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1e293b;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  border: 1px solid rgba(226, 232, 240, 0.5);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.detail-item:hover .detail-value {
+  background: var(--status-color);
+  color: white;
+  border-color: var(--status-color);
+  transform: scale(1.05);
+}
+
+/* Actions sekcija */
+.charger-actions {
+  padding: 2rem;
+  border-top: 1px solid #e2e8f0;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+.statistics-button {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(30, 41, 59, 0.3);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.statistics-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(30, 41, 59, 0.4);
+  background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+}
+
+.button-text {
+  flex: 1;
+  text-align: center;
+}
+
+.button-icon {
+  font-size: 1.1rem;
+  transition: transform 0.3s ease;
+}
+
+.statistics-button:hover .button-icon {
+  transform: scale(1.1);
+}
+
+/* Premium badge */
+.premium-badge {
+  position: absolute;
+  top: -1px;
+  left: 1rem;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0 0 8px 8px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  z-index: 3;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+/* Pulse animacija za charging status */
+.status-card-block.charger-card[data-status="charging"] .status-badge {
+  animation: pulse 2s infinite;
+}
+
+/* Glassmorphism effect */
+.status-card-block.charger-card .status-header-card {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+/* Charger grid layout */
+.charger-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.charger-card-wrapper {
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  border: 1px solid #f1f5f9;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.charger-card-wrapper:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border-color: var(--status-color);
+}
+
+.charger-card-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--status-color);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.charger-card-wrapper:hover::before {
+  transform: scaleX(1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .status-card-block.charger-card .status-header-card {
+    padding: 1.25rem 1.5rem;
+  }
+  
+  .status-card-block.charger-card .status-icon {
+    font-size: 1.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  
+  .status-card-block.charger-card .status-title {
+    font-size: 1.25rem;
+  }
+  
+  .charger-details {
+    padding: 1.5rem;
+  }
+  
+  .charger-actions {
+    padding: 1.5rem;
+  }
+  
+  .charger-cards-grid {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+}
+
+/* Staggered animation delays */
+.status-card-block.charger-card:nth-child(1) { animation-delay: 0.1s; }
+.status-card-block.charger-card:nth-child(2) { animation-delay: 0.2s; }
+.status-card-block.charger-card:nth-child(3) { animation-delay: 0.3s; }
+.status-card-block.charger-card:nth-child(4) { animation-delay: 0.4s; }
+.status-card-block.charger-card:nth-child(5) { animation-delay: 0.5s; }
+.status-card-block.charger-card:nth-child(6) { animation-delay: 0.6s; }
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .status-card-block.charger-card {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+    border-color: #374151;
+  }
+  
+  .status-card-block.charger-card .status-header-card {
+    background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+    border-color: #374151;
+  }
+  
+  .status-card-block.charger-card .status-title {
+    color: #f3f4f6;
+  }
+  
+  .status-card-block.charger-card .status-count {
+    color: #9ca3af;
+  }
+  
+  .charger-details {
+    background: #1f2937;
+  }
+  
+  .detail-item {
+    background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+    border-color: #4b5563;
+  }
+  
+  .detail-label {
+    color: #9ca3af;
+  }
+  
+  .detail-value {
+    color: #f3f4f6;
+    background: rgba(55, 65, 81, 0.8);
+    border-color: rgba(75, 85, 99, 0.5);
+  }
+  
+  .charger-actions {
+    background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+    border-color: #374151;
+  }
+}

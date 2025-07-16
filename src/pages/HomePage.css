@@ -1,0 +1,471 @@
+/* HomePage.css - Dopune za moderne kartice */
+
+/* Poboljšanja za charger-grid */
+.charger-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 2.3rem;
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
+  position: relative;
+}
+
+/* Dodaj subtle background pattern */
+.charger-grid::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.02) 0%, transparent 50%);
+  z-index: -1;
+  border-radius: 20px;
+}
+
+/* Sophisticated grid hover efekat - poboljšan */
+.charger-grid:hover .charger-info-card:not(:hover) {
+  opacity: 0.75;
+  transform: scale(0.98);
+}
+
+.charger-grid .charger-info-card {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+/* Dodaj connection lines između kartica (opciono) */
+.charger-grid.connected::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    linear-gradient(90deg, transparent 40%, rgba(226, 232, 240, 0.5) 50%, transparent 60%),
+    linear-gradient(0deg, transparent 40%, rgba(226, 232, 240, 0.5) 50%, transparent 60%);
+  background-size: 50px 50px;
+  z-index: -1;
+  opacity: 0.3;
+}
+
+/* Enhanced stats summary */
+.stats-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  border-radius: 16px;
+  padding: 2.5rem;
+  margin-bottom: 3rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+  animation: slideInFromTop 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Dodaj sophisticated background za stats */
+.stats-summary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.01) 0%, rgba(16, 185, 129, 0.01) 100%);
+  z-index: 1;
+}
+
+.stats-summary > * {
+  position: relative;
+  z-index: 2;
+}
+
+.stats-summary:hover {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+  border-color: #cbd5e1;
+}
+
+/* Poboljšan stats summary item */
+.stats-summary-item {
+  text-align: center;
+  padding: 1rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.stats-summary-item:hover {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  transform: translateY(-2px);
+}
+
+.stats-summary-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 3px;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  border-radius: 2px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.stats-summary-item:hover::before {
+  opacity: 1;
+}
+
+/* Dodaj ikone za stats */
+.stats-summary-item[data-stat="total"]::after {
+  content: '⚡';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 1.5rem;
+  opacity: 0.6;
+}
+
+.stats-summary-item[data-stat="available"]::after {
+  content: '✅';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 1.5rem;
+  opacity: 0.6;
+}
+
+.stats-summary-item[data-stat="busy"]::after {
+  content: '⏳';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 1.5rem;
+  opacity: 0.6;
+}
+
+/* Enhanced separator */
+.stats-summary-separator {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, #e2e8f0 20%, #cbd5e1 50%, #e2e8f0 80%, transparent);
+  position: relative;
+}
+
+.stats-summary-separator::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* Container za sve kartice sa fine borderima */
+.chargers-container {
+  background: white;
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  border: 1px solid #f1f5f9;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.chargers-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 10% 10%, rgba(59, 130, 246, 0.005) 0%, transparent 50%),
+    radial-gradient(circle at 90% 90%, rgba(16, 185, 129, 0.005) 0%, transparent 50%);
+  z-index: 1;
+}
+
+.chargers-container > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Section header za kartice */
+.chargers-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.chargers-section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.chargers-section-title::before {
+  content: '🔌';
+  font-size: 1.25rem;
+}
+
+.chargers-count {
+  background: linear-gradient(135deg, #e2e8f0 0%, #f1f5f9 100%);
+  color: #64748b;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.chargers-count:hover {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
+  border-color: #3b82f6;
+}
+
+/* Filter/Sort controls */
+.chargers-controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #fafbfc 0%, #f8fafc 100%);
+  border-radius: 12px;
+  border: 1px solid #f1f5f9;
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.control-label {
+  font-size: 0.9rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.control-select {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: white;
+  font-size: 0.9rem;
+  color: #0f172a;
+  transition: all 0.3s ease;
+}
+
+.control-select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Enhanced loading state */
+.charger-grid.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.charger-grid.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e2e8f0;
+  border-top: 3px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 10;
+}
+
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Floating action button za dodavanje novog punjača */
+.floating-add-button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+}
+
+.floating-add-button::before {
+  content: '+';
+  font-weight: 300;
+}
+
+.floating-add-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 28px rgba(59, 130, 246, 0.5);
+}
+
+/* Scroll to top button */
+.scroll-to-top {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: white;
+  opacity: 0;
+  transform: translateY(100px);
+}
+
+.scroll-to-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-to-top::before {
+  content: '↑';
+  font-weight: 600;
+}
+
+.scroll-to-top:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.4);
+}
+
+/* Responsive poboljšanja */
+@media (max-width: 1024px) {
+  .charger-grid {
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 2rem;
+  }
+  
+  .chargers-container {
+    padding: 2rem;
+  }
+  
+  .stats-summary {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .charger-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .chargers-container {
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+  
+  .stats-summary {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+  
+  .stats-summary-separator {
+    display: none;
+  }
+  
+  .chargers-section-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  
+  .chargers-controls {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  
+  .control-group {
+    justify-content: space-between;
+  }
+  
+  .floating-add-button {
+    bottom: 1rem;
+    right: 1rem;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .scroll-to-top {
+    bottom: 1rem;
+    left: 1rem;
+    width: 45px;
+    height: 45px;
+  }
+}
+
+@media (max-width: 480px) {
+  .charger-grid {
+    gap: 1rem;
+  }
+  
+  .chargers-container {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .stats-summary {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .chargers-section-title {
+    font-size: 1.25rem;
+  }
+  
+  .chargers-controls {
+    padding: 1rem;
+  }
+}

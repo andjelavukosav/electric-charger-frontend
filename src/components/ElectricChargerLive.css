@@ -1,0 +1,631 @@
+/* ElectricChargerLive.css - Popravljena širina kartica */
+
+.charger-live-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 320px;
+  width: 100%; /* Dodano: puna širina kontejnera */
+  min-width: 280px; /* Dodano: minimalna širina */
+  max-width: 400px; /* Dodano: maksimalna širina za lepši izgled */
+  flex: 1; /* Dodano: za flex layout */
+  position: relative;
+  overflow: hidden;
+  background: white;
+  border-radius: 16px;
+  border: 1px solid #d1d5db;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+}
+
+/* Jači gradient overlay za bolje izdvajanje */
+.charger-live-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.02) 0%, rgba(16, 185, 129, 0.02) 100%);
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.charger-live-card:hover::before {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%);
+}
+
+/* Sve unutar kartice treba biti iznad overlay-a */
+.charger-live-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+.charger-live-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+  border-color: #9ca3af;
+}
+
+/* Ako su kartice u grid layout-u */
+.charger-live-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+}
+
+/* Ako su kartice u flex layout-u */
+.charger-live-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.charger-live-container .charger-live-card {
+  flex: 1 1 280px; /* grow shrink basis */
+}
+
+/* Header sekcija kartice */
+.charger-live-header {
+  padding: 1.5rem 1.5rem 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%; /* Osigurava punu širinu */
+  box-sizing: border-box; /* Uključuje padding u širinu */
+}
+
+.charger-live-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  border-radius: 12px;
+  color: white;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  transition: all 0.3s ease;
+  font-size: 1.5rem;
+  flex-shrink: 0; /* Sprečava smanjivanje ikone */
+}
+
+.charger-live-header:hover .charger-live-icon {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+}
+
+.charger-live-header h3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+  letter-spacing: -0.01em;
+  flex-grow: 1; /* Zauzeće dostupan prostor */
+  word-wrap: break-word; /* Prelama dugačke reči */
+}
+
+/* Status indicator - konzistentan sa ChargerInfoCard */
+.charger-live-status {
+  position: absolute;
+  top: 0.75rem;   /* malo niže */
+  right: 0.75rem; /* malo više od ivice */
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  z-index: 3;
+}
+
+
+
+/* Status indikatori */
+.charger-live-status.charging {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+  animation: sophisticatedPulse 3s infinite;
+}
+
+.charger-live-status.idle {
+  background: linear-gradient(135deg, #fde68a 0%, #fbbf24 100%);
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.2);
+  animation: busyPulse 3s infinite;
+}
+
+
+
+
+/* Animacije za status */
+@keyframes sophisticatedPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+    transform: scale(1.05);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    transform: scale(1);
+  }
+}
+
+@keyframes busyPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(245, 158, 11, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+  }
+}
+
+@keyframes offlinePulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+/* Specs sekcija */
+.charger-live-specs {
+  padding: 1.5rem;
+  flex-grow: 1;
+  background: white;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.live-spec-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e5e7eb;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  width: 100%;
+}
+
+.live-spec-item:last-child {
+  border-bottom: none;
+}
+
+.live-spec-item:hover {
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin: 0 -1rem;
+  border-radius: 8px;
+}
+
+.live-spec-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 0;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  border-radius: 2px;
+  transition: height 0.3s ease;
+}
+
+.live-spec-item:hover::before {
+  height: 60%;
+}
+
+.live-spec-label {
+  font-size: 0.875rem;
+  color: #4b5563;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.live-spec-value {
+  display: flex;                /* Rasporedi sadržaj horizontalno */
+  align-items: center;          /* Vertikalno centriraj sadržaj */
+  gap: 0.4rem;                  /* Razmak između ikone i teksta */
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #111827;
+  background: linear-gradient(135deg, #d1d5db 0%, #e5e7eb 100%);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  border: 1px solid #d1d5db;
+  white-space: nowrap;          /* ✅ Ne dozvoljava prelamanje */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+
+
+.live-spec-item:hover .live-spec-value {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
+  border-color: #3b82f6;
+  transform: scale(1.05);
+}
+
+/* Ikone za specifikacije */
+.live-spec-item[data-spec="status"] .live-spec-label::before {
+  content: '⚡';
+}
+
+.live-spec-item[data-spec="type"] .live-spec-label::before {
+  content: '🔌';
+}
+
+.live-spec-item[data-spec="power"] .live-spec-label::before {
+  content: '⚡';
+}
+
+.live-spec-item[data-spec="current"] .live-spec-label::before {
+  content: '🔋';
+}
+
+.live-spec-item[data-spec="voltage"] .live-spec-label::before {
+  content: '⚡';
+}
+
+.live-spec-item[data-spec="connectors"] .live-spec-label::before {
+  content: '🔗';
+}
+
+.live-spec-item[data-spec="time"] .live-spec-label::before {
+  content: '⏱️';
+}
+
+/* Timing sekcija */
+.charger-live-timing {
+  padding: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.timing-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  font-size: 0.875rem;
+  width: 100%;
+}
+
+.timing-label {
+  color: #4b5563;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.timing-value {
+  color: #111827;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+  background: linear-gradient(135deg, #d1d5db 0%, #e5e7eb 100%);
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  white-space: nowrap;
+}
+
+.timing-value.active {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border-color: #10b981;
+}
+
+.timing-value.empty {
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  color: #9ca3af;
+  border-color: #e5e7eb;
+}
+
+/* Premium badge */
+.charger-live-card .premium-badge {
+  position: absolute;
+  top: -1px;
+  left: 1rem;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0 0 8px 8px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  z-index: 3;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+/* Loading state */
+.charger-live-card.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.charger-live-card.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent 25%, rgba(255, 255, 255, 0.5) 50%, transparent 75%);
+  background-size: 200% 100%;
+  animation: loadingShimmer 2s infinite;
+  z-index: 4;
+}
+
+@keyframes loadingShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Responsive design - poboljšano */
+@media (max-width: 1024px) {
+  .charger-live-card {
+    min-height: 300px;
+    max-width: 350px;
+  }
+  
+  .charger-live-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.25rem;
+  }
+  
+  .charger-live-container .charger-live-card {
+    flex: 1 1 250px;
+  }
+  
+  .charger-live-header {
+    padding: 1.25rem 1.25rem 0.75rem;
+  }
+  
+  .charger-live-specs {
+    padding: 1.25rem;
+  }
+  
+  .charger-live-timing {
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .charger-live-card {
+    min-height: 280px;
+    max-width: 100%;
+    min-width: 240px;
+  }
+  
+  .charger-live-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+  
+  .charger-live-container .charger-live-card {
+    flex: 1 1 240px;
+  }
+  
+  .charger-live-header {
+    padding: 1rem 1rem 0.75rem;
+  }
+  
+  .charger-live-specs {
+    padding: 1rem;
+  }
+  
+  .charger-live-timing {
+    padding: 1rem;
+  }
+  
+  .charger-live-header h3 {
+    font-size: 1rem;
+  }
+  
+  .live-spec-item {
+    padding: 0.625rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .charger-live-card {
+    min-height: 260px;
+    min-width: 100%;
+    max-width: 100%;
+  }
+  
+  .charger-live-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .charger-live-container {
+    flex-direction: column;
+  }
+  
+  .charger-live-container .charger-live-card {
+    flex: 1 1 auto;
+  }
+  
+  .charger-live-header,
+  .charger-live-specs,
+  .charger-live-timing {
+    padding: 0.875rem;
+  }
+  
+  .charger-live-header h3 {
+    font-size: 0.95rem;
+  }
+  
+  .live-spec-item {
+    padding: 0.5rem 0;
+  }
+  
+  .live-spec-label,
+  .live-spec-value {
+    font-size: 0.8rem;
+  }
+  
+  .live-spec-value {
+    max-width: 60%;
+  }
+}
+
+/* Dark mode podrška */
+@media (prefers-color-scheme: dark) {
+  .charger-live-card {
+    background: #1f2937;
+    border-color: #374151;
+  }
+  
+  .charger-live-header {
+    background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+    border-color: #374151;
+  }
+  
+  .charger-live-header h3 {
+    color: #f3f4f6;
+  }
+  
+  .live-spec-label {
+    color: #9ca3af;
+  }
+  
+  .live-spec-value {
+    color: #f3f4f6;
+    background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
+    border-color: #4b5563;
+  }
+  
+  .live-spec-item {
+    border-color: #374151;
+  }
+  
+  .charger-live-timing {
+    background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+    border-color: #374151;
+  }
+  
+  .timing-value {
+    color: #f3f4f6;
+    background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
+    border-color: #4b5563;
+  }
+}
+
+/* Dodatni status badge animirani efekti i boje */
+
+/* Charging - zeleno + pulsiranje */
+.status-card-block.charger-card[data-status="charging"] .status-badge {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  animation: sophisticatedPulse 3s infinite;
+}
+
+/* Idle - žuto-narandžasto */
+.status-card-block.charger-card[data-status="idle"] .status-badge {
+background: linear-gradient(135deg, #6b7280 0%, #6b7280 100%);
+  animation: busyPulse 3s infinite;
+}
+
+/* Error - crveno */
+.status-card-block.charger-card[data-status="error"] .status-badge {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  animation: offlinePulse 3s infinite;
+}
+
+/* Completed - narandžasto-braon */
+.status-card-block.charger-card[data-status="completed"] .status-badge {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  animation: busyPulse 3s infinite;
+}
+
+/* Animacije za status badge efekte */
+@keyframes sophisticatedPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+    transform: scale(1.05);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    transform: scale(1);
+  }
+}
+
+@keyframes busyPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(245, 158, 11, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+  }
+}
+
+@keyframes offlinePulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+.detail-value {
+  white-space: nowrap; /* ⛔️ Ne dozvoljava prelazak u novi red */
+  min-width: 120px;     /* ✅ Dodaje minimalnu širinu za sat */
+  max-width: 100%;      /* Sprečava preveliki rast */
+  overflow: hidden;     /* Sakriva višak teksta */
+  text-overflow: ellipsis; /* Dodaje "..." ako ne stane */
+}
+
+.detail-item {
+  flex-wrap: nowrap; /* Sprečava prelazak u novi red unutar item-a */
+  min-width: 300px;  /* Ili neka vrednost koja odgovara layoutu */
+}
+
+.status-card-block.charger-card .status-badge {
+  font-size: 0.95rem;       /* malo manji font, umesto recimo 1.125rem */
+  padding: 0.3rem 0.7rem;   /* smanjen padding da bude kompaktnije */
+  min-width: auto;          /* ili manja vrednost ako imaš */
+  height: auto;             /* da se prilagodi tekstu */
+  border-radius: 16px;      /* može i manje ako želiš oštrije uglove */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+

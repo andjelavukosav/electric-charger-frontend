@@ -1,25 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Sidebar from "./components/Sidebar";
+import Home from "./pages/HomePage";
+import LiveDashboard from "./pages/LiveDashboard";
+import "./App.css";
+import ChargerStatisticsPage from './pages/ChargerStatisticsPage'; // Nova komponenta koju ćete kreirati
 
 function App() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => setSidebarOpen(prev => !prev);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Router>
+      <div className="layout">
+        <Sidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
+        <main
+          className="main-content"
+          style={{
+            marginLeft: sidebarOpen ? 200 : 60,
+            transition: "margin-left 0.3s ease",
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/dashboard" element={<LiveDashboard />} />
+            <Route path="/charger-statistics/:deviceId" element={<ChargerStatisticsPage />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
   );
 }
 
